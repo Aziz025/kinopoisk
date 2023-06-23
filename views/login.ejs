@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%-include('partials/head.ejs')%>
+    <title>login</title>
+</head>
+<body>
+    <%-include('partials/header.ejs')%>
+
+    <div class="container">
+        <div class="main">
+            <form action="" class="form">
+                <h3>Войти</h3>
+                <fieldset class="fieldset">
+                    <label for="">E-mail</label>
+                    <input type="email" placeholder="Введите почту" name="email">
+                </fieldset>
+                <fieldset class="fieldset">
+                    <label for="">Password</label>
+                    <input type="password" placeholder="Введите пароль" name="password">
+                </fieldset>
+                <fieldset class="fieldset">
+                <button type="submit">Войти</button>
+                </fieldset>
+                <p>У вас нету аккаунта? <a href="/register">Зарегистрироваться</a></p>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>
