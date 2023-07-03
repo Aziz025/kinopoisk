@@ -11,7 +11,7 @@ app.use(express.urlencoded())
 app.use (session({
     name: 'kinopoisk.session',
     secret: 'keybord cat',
-    maxAge: 1000 * 60 * 60 * 60 * 7,
+    maxAge: 1000 * 60 * 60 * 7,
     resave: false,
     store: mongooseStore.create({
         mongoUrl: 'mongodb://127.0.0.1:27017'
