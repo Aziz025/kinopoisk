@@ -9,10 +9,14 @@ passport.use(new localStrategy(
     },
     function(email, password, done){
         User.findOne({email}).then(user =>{
-            bcrypt.compare(password, user.password, function(err, result) {
-                if(err) {return done(err)}
-                if(result) {return done(null , user)}
-            });
+            if(user.password){
+                bcrypt.compare(password, user.password, function(err, result) {
+                    if(err) {return done(err)}
+                    if(result) {return done(null , user)}
+                });
+            }else{
+                return done('Пользователь не найден')
+            }
         }).catch(e =>{
             return done(e)
         })

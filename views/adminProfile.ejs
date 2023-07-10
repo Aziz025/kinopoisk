@@ -12,9 +12,13 @@
         <div class="main">
             <div class="categories">
                 <h3>Жанры</h3>
-                <a href="">Комедия</a>
-                <a href="">Драмма</a>
-                <a href="">Ужасы</a>
+                <%
+                    genres.forEach(genre => {
+                %>
+                    <a href=""><%= genre.name%></a>
+                <%        
+                })
+                %>
             </div>
             <div class="main-content">
                 <h3>Профиль</h3>
@@ -23,13 +27,13 @@
                     <img src="/images/profile-img.png" alt="">
                     </div>
                     <div class="profile-info">
-                        <p> <span>Полное имя:</span> Сеналов Азиз</p>
-                        <p><span>E-mail: </span>senalovaziz@gmail.com</p>
-                        <button class="edit-btn">Редактировать профиль</button>
-                        <button class="logout-btn">Выход</button>
+                        <p> <span>Полное имя: </span><%=user.full_name%></p>
+                        <p><span>E-mail: </span><%=user.email%></p>
+                        <a class="edit-btn">Редактировать профиль</a>
+                        <a href="/api/signout" class="logout-btn">Выход</a>
                     </div>
                 </div>
-                <h3>Сохраненные фильмы</h3>
+                <h3>Фильмы</h3>
                 <a href="/new" class="add-btn">Добавить фильм</a>
                 <div class="main-card">
                     <div class="card-left">

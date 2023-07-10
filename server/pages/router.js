@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const Genres = require('../Genres/genres')
+const User = require('../auth/User')
 
 router.get('/' , async(req, res) => {
     const allGenres = await Genres.find()
@@ -15,12 +16,20 @@ router.get('/register' , (req, res) => {
     res.render("register" , {user: req.user ? req.user : {}})
 })
 
-router.get('/profile/:id' , (req, res) => {
-    res.render("profile" , {user: req.user ? req.user : {}})
+router.get('/profile/:id' , async(req, res) => {
+    const allGenres = await Genres.find()
+    const user = await User.findById(req.params.id)
+    if(user.full_name.length > 0){
+        res.render("profile" , {user: user , genres: allGenres , loginUser: req.user})
+    }else{
+        res.redirect('/not-found')
+    }
 })
 
-router.get('/admin' , (req, res) => {
-    res.render("adminProfile" , {user: req.user ? req.user : {}})
+router.get('/admin/:id' , async(req, res) => {
+    const allGenres = await Genres.find()
+    const user = await User.findById(req.params.id)
+    res.render("adminProfile" , {genres: allGenres , loginUser: req.user ? req.user : {}, user: user})
 })
 
 router.get('/new' , (req, res) => {
@@ -29,6 +38,10 @@ router.get('/new' , (req, res) => {
 
 router.get('/edit' , (req, res) => {
     res.render("editFilm" , {user: req.user ? req.user : {}})
+})
+
+router.get('/not-found' , (req , res) => {
+    res.render('notFound')
 })
 
 module.exports = router
