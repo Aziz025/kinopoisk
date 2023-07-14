@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const Genres = require('../Genres/genres')
+const Country = require('../Country/Country')
 const User = require('../auth/User')
 
 router.get('/' , async(req, res) => {
@@ -32,12 +33,16 @@ router.get('/admin/:id' , async(req, res) => {
     res.render("adminProfile" , {genres: allGenres , loginUser: req.user ? req.user : {}, user: user})
 })
 
-router.get('/new' , (req, res) => {
-    res.render("newFilm" , {user: req.user ? req.user : {}})
+router.get('/new' , async(req, res) => {
+    const allGenres = await Genres.find()
+    const allCountries = await Country.find()
+    res.render("newFilm" , {genres: allGenres , countries: allCountries , user: req.user ? req.user : {}})
 })
 
-router.get('/edit' , (req, res) => {
-    res.render("editFilm" , {user: req.user ? req.user : {}})
+router.get('/edit' , async(req, res) => {
+    const allGenres = await Genres.find()
+    const allCountries = await Country.find()
+    res.render("editFilm" , {genres: allGenres , countries: allCountries , user: req.user ? req.user : {}})
 })
 
 router.get('/not-found' , (req , res) => {
