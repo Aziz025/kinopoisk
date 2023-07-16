@@ -62,7 +62,7 @@
                             <a href="/edit/<%=item._id%>">
                                 Редактировать
                             </a>
-                            <a>
+                            <a onclick="deleteFilms('<%=item._id%>' , '<%=item.author._id%>')">
                                 Удалить
                             </a>    
                         </div>
@@ -74,5 +74,6 @@
             </div>
         </div>
     </div>
+<%- include('partials/scripts.ejs')%>
 </body>
 </html>
