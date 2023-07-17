@@ -41,6 +41,10 @@
                     </div>
                 </div>
                 <h3>Сохраненные фильмы</h3>
+                <%
+                    if(user.toWatch.length > 0){
+                       user.toWatch.forEach(film => {
+                %>
                 <div class="main-card">
                     <div class="card-left">
                         <div class="film-img">
@@ -65,7 +69,11 @@
                             Буду смотреть
                         </button>
                     </div>
-                </div>
+                </div>              
+                <%
+                        }) 
+                    }
+                %>
             </div>
         </div>
     </div>

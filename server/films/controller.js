@@ -1,4 +1,6 @@
+const { log } = require('console')
 const Film = require('./film')
+const User = require('../auth/User')
 const fs = require('fs')
 const path = require('path')
 const createFilm = async(req , res) => {
@@ -62,8 +64,22 @@ const deleteFilm = async(req , res) =>{
     }
 }
 
+const saveFilm = async(req , res) => {
+    if(req.user && req.body.id){
+        const user = await User.findById(req.user.id)
+        const findFilm = user.toWatch.filter(item => item._id == req.body.id)
+        if(findFilm.length == 0){
+            user.toWatch.push(req.body.id)
+            user.save()
+            res.send('Фильм успешно сохранен')
+        }else{
+            res.send('Фильм уже сохранен')
+        }
+    }
+}
 module.exports = {
     createFilm,
     editFilm,
-    deleteFilm
+    deleteFilm,
+    saveFilm
 }

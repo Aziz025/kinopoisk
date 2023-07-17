@@ -21,11 +21,10 @@ router.get('/register' , (req, res) => {
 
 router.get('/profile/:id' , async(req, res) => {
     const allGenres = await Genres.find()
-    const user = await User.findById(req.params.id)
-    if(user.full_name.length > 0){
+    const user = await User.findById(req.params.id).populate('toWatch')
+    console.log(user)
+    if(user){
         res.render("profile" , {user: user , genres: allGenres , loginUser: req.user})
-    }else{
-        res.redirect('/not-found')
     }
 })
 
