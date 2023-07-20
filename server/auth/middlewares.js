@@ -1,12 +1,20 @@
-const isAuth = (req , res , next) => {
-    console.log(req.user);
+const isAdmin = (req , res , next) => {
     if(req.user && req.user.isAdmin){
         next()
     }else{
-        res.status(401).send('Unauthorized')
+        res.status(400).send('Unauthorized')
+    }
+}
+
+const isAuthUser = (req , res , next) => {
+    if(req.user){
+        next()
+    }else{
+        res.status(400).send('Unauthorized')
     }
 }
 
 module.exports = {
-    isAuth
+    isAdmin,
+    isAuthUser
 }

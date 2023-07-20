@@ -8,7 +8,8 @@ const Film = require('../films/film')
 router.get('/' , async(req, res) => {
     const allGenres = await Genres.find()
     const films = await Film.find().populate('country').populate('genre')
-    res.render("index" , {genres: allGenres , user: req.user ? req.user : {} , films})
+    const user = req.user ? await User.findById(req.user._id) : {}
+    res.render("index" , {genres: allGenres , user , films})
 })
 
 router.get('/login' , (req, res) => {
@@ -22,9 +23,12 @@ router.get('/register' , (req, res) => {
 router.get('/profile/:id' , async(req, res) => {
     const allGenres = await Genres.find()
     const user = await User.findById(req.params.id).populate('toWatch')
-    console.log(user)
+    .populate({path: 'toWatch' , populate: {path: 'country'}})
+    .populate({path: 'toWatch' , populate: {path: 'genre'}})
     if(user){
         res.render("profile" , {user: user , genres: allGenres , loginUser: req.user})
+    }else{
+        res.redirect('notFound')
     }
 })
 
