@@ -27,9 +27,9 @@
                             <img src="<%=item.image%>" alt="">
                         </div>
                         <div class="film-info">
-                            <a href=""><%=item.titleRus%></a>
-                            <a href=""><%=item.titleEng%>, <%=item.year%>, <%=item.time%>мин</a>
-                            <a href=""><%=item.country.name%> , <%=item.genre.name%></a>
+                            <a href="/detail/<%=item._id%>"><%=item.titleRus%></a>
+                            <a href="/detail/<%=item._id%>"><%=item.titleEng%>, <%=item.year%>, <%=item.time%>мин</a>
+                            <a href="/detail/<%=item._id%>"><%=item.country.name%> , <%=item.genre.name%></a>
                             <button class="film-btn">
                                 <img src="/images/icons/play.svg" alt="">
                                 Смотреть
