@@ -6,3 +6,9 @@ function saveToWatch(id){
         }
     })
 }
+
+function deleteFromToWatch(id){
+    axios.delete(`/api/films/save${id}`).then(data => {
+        console.log(data)
+    })
+}

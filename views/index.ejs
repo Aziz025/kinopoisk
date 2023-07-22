@@ -28,7 +28,7 @@
                         </div>
                         <div class="film-info">
                             <a href=""><%=item.titleRus%></a>
-                            <a href=""><%=item.titleEng%>, <%=item.year%>, <%=item.time%></a>
+                            <a href=""><%=item.titleEng%>, <%=item.year%>, <%=item.time%>мин</a>
                             <a href=""><%=item.country.name%> , <%=item.genre.name%></a>
                             <button class="film-btn">
                                 <img src="/images/icons/play.svg" alt="">
@@ -43,8 +43,8 @@
                         <%
                             if(user.toWatch && user.toWatch.includes(item._id)){
                         %>
-                            <button class="film-btn" onclick="saveToWatch('<%=item._id%>')">
-                                <img src="/images/icons/save.svg" alt="">
+                            <button class="film-btn" onclick="deleteFromToWatch('<%=item._id%>')">
+                                <img src="/images/icons/saved.png" alt="">
                                 Сохранено
                             </button>        
                         <%  
