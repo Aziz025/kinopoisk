@@ -10,13 +10,27 @@ router.get('/' , async(req, res) => {
     const genres = await Genres.findOne({key : req.query.genre})
     if(genres){
         options.genre = genres._id
+        res.locals.genre = req.query.genre
     }
     let page = 0
     const limit = 3
     if(req.query.page && req.query.page > 0){
         page = req.query.page
     }
-    const totalFilms = await Film.count()
+
+    if(req.query.search && req.query.search.length > 0){
+        options.$or = [
+            {
+                titleRus: new RegExp(req.query.search , 'i')
+            },
+            {
+                titleEng: new RegExp(req.query.search , 'i')
+            }
+        ]
+        res.locals.search = req.query.search
+    }
+
+    const totalFilms = await Film.count(options)
     const allGenres = await Genres.find()
     const films = await Film.find(options).limit(limit).skip(page * limit).populate('country').populate('genre')
     const user = req.user ? await User.findById(req.user._id) : {}
