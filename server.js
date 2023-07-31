@@ -28,10 +28,11 @@ app.use(require('./server/Genres/router'))
 app.use(require('./server/Country/router'))
 app.use(require('./server/auth/router'))
 app.use(require('./server/films/router'))
+app.use(require('./server/Rates/router'))
 
 
 
-const PORT = 8000;
+const PORT = 1000;
 app.listen(PORT , ()  =>  {
     console.log(`Server listening on port ${PORT}`);
 })
