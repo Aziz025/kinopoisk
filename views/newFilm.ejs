@@ -32,10 +32,6 @@
                     <input type="text" placeholder="Введите длительность фильма" name="time">
                 </fieldset>
                 <fieldset class="fieldset">
-                    <label for="">Ссылка на фильм</label>
-                    <input type="text" placeholder="Введите ссылку на фильм" name="video">
-                </fieldset>
-                <fieldset class="fieldset">
                     <label for="">Выберите страну выпуска</label>
                     <select name="country" id="">
                     <%
@@ -60,6 +56,9 @@
                         
                     </select>
                 </fieldset>
+                <a class="addSeriesBtn" id="addSeriesBtn" onclick="addSeries()">Добавить серии</a>
+                <a class="addSeriesBtn" id="addFilmUrlBtn" onclick="addFilmUrl()">Добавить ссылку на фильм</a>
+                <div id="urls"></div>
                 <fieldset class="fieldset">
                 <button type="submit">Добавить</button>
                 </fieldset>

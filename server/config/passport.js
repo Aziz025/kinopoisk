@@ -3,8 +3,9 @@ const User = require('../auth/User')
 const bcrypt = require('bcrypt')
 const localStrategy = require('passport-local')
 const GoogleStrategy = require('passport-google-oauth20').Strategy
-// CLIENT_ID: 96184516550-8rh2jfic210jr43s07m8vrtcopu7fbiq.apps.googleusercontent.com
-// CLIENT_SECRET: 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
+// const GitHubStrategy = require('passport-github2').Strategy
+// CLIENT_ID: 238be28c3999381e3317
+// CLIENT_SECRET: 4648d8f2a1edd4d4b826a4db3c9ea19d3014d606
 passport.use(new localStrategy(
     {
         usernameField: 'email'
@@ -40,9 +41,32 @@ passport.use(new GoogleStrategy({
             email: profile.emails[0].value
         }).save()
         return cb(null, newUser)
-    }else return cb(null, user)
+    }else{
+        return cb(null, user)
+    }
 }
 ));
+
+// passport.use(new GitHubStrategy({
+//     clientID: '238be28c3999381e3317',
+//     clientSecret: '4648d8f2a1edd4d4b826a4db3c9ea19d3014d606',
+//     callbackURL: "http://localhost:1000/api/auth/github",
+//     scope: ['openid' , 'email' , 'profile']
+//   },
+//   async function(accessToken, refreshToken, profile, done) {
+//     const user = await User.findOne({githubId: profile.id})
+//     if(!user){
+//         const newUser = await new User({
+//             githubId: profile.id,
+//             full_name: profile.displayName,
+//             email: profile.emails
+//         }).save()
+//         return cb(null, newUser)
+//     }else{
+//         return cb(null, user)
+//     } 
+//   }
+// ));
 
 passport.serializeUser(function(user, done){
     done(null , user._id)
